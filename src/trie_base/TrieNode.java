@@ -12,14 +12,35 @@ public class TrieNode {
         this.value = value;
     }
 
-    TrieNode(){
+    TrieNode() {
         this.is_key = false;
         this.data = 0;
         this.value = ' ';
     }
 
-    private boolean isKey(){
+    public boolean isKey() {
         return is_key;
+    }
+
+    public void setKey(boolean key) {
+        this.is_key = key;
+    }
+
+    public int getData() {
+        if (isKey()) {
+            return data;
+        }
+        return 0;
+    }
+
+    public void addData() {
+        if (isKey()) {
+            data += 1;
+        }
+    }
+
+    public char getValue(){
+        return value;
     }
 
     private int letterInNumber(char letter) {
@@ -43,10 +64,6 @@ public class TrieNode {
     public boolean hasChild(char value) {
         int indexOfValue = letterInNumber(value);
         return children[indexOfValue] != null;
-    }
-
-    public void setKey(boolean is_key){
-
     }
 
 }
