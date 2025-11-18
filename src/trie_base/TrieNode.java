@@ -5,6 +5,7 @@ public class TrieNode {
     int data;
     char value;
     TrieNode[] children = new TrieNode[32];
+    String supportableChars = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
 
     TrieNode(char value, int data, boolean is_key) {
         this.is_key = is_key;
@@ -39,21 +40,34 @@ public class TrieNode {
         }
     }
 
-    public char getValue(){
+    public char getValue() {
         return value;
     }
 
     private int letterInNumber(char letter) {
+        checker(letter);
         return letter - 'а';
     }
 
-    public TrieNode addChild(char value) {
+    private void checker(char value) {
+        boolean flag = false;
+        int i = 0;
+        while (i < supportableChars.length()) {
+            if (value == supportableChars.charAt(i)) {
+                flag = true;
+            }
+            i++;
+        }
+        if (!flag) {
+            throw new IllegalArgumentException("Not supportable symbol");
+        }
+    }
+
+    public void addChild(char value) {
         int indexOfValue = letterInNumber(value);
         if (children[indexOfValue] == null) {
             children[indexOfValue] = new TrieNode(value, 0, false);
-            return children[indexOfValue];
         }
-        return children[indexOfValue];
     }
 
     public TrieNode getChild(char value) {
