@@ -1,11 +1,11 @@
 package trie_base;
 
 public class TrieNode {
-    boolean is_key;
-    int data;
-    char value;
-    TrieNode[] children = new TrieNode[32];
-    String supportableChars = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
+    private boolean is_key;
+    private int data;
+    private char value;
+    private TrieNode[] children = new TrieNode[32];
+    private final String supportableChars = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
 
     TrieNode(char value, int data, boolean is_key) {
         this.is_key = is_key;
@@ -44,7 +44,7 @@ public class TrieNode {
         return value;
     }
 
-    private int letterInNumber(char letter) {
+    public int letterInNumber(char letter) {
         checker(letter);
         return letter - 'а';
     }
@@ -65,7 +65,7 @@ public class TrieNode {
 
     public void addChild(char value) {
         int indexOfValue = letterInNumber(value);
-        if (children[indexOfValue] == null) {
+        if (!hasChild(value)) {
             children[indexOfValue] = new TrieNode(value, 0, false);
         }
     }
@@ -78,6 +78,11 @@ public class TrieNode {
     public boolean hasChild(char value) {
         int indexOfValue = letterInNumber(value);
         return children[indexOfValue] != null;
+    }
+
+
+    public TrieNode[] getChildrenArray(){
+        return children;
     }
 
 }
