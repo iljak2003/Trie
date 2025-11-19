@@ -25,7 +25,7 @@ public class Trie {
         node.addData();
     }
 
-    public List<String> getPrefixNode(String prefix) {
+    public List<WordK> getPrefixNode(String prefix) {
         prefix = wordToLowerCase(prefix);
         TrieNode node = root;
         for (int i = 0; i < prefix.length(); i++) {
@@ -35,17 +35,17 @@ public class Trie {
             }
             node = node.getChild(currentLetter);
         }
-        List<String> qwe = new ArrayList<>();
+        List<WordK> qwe = new ArrayList<>();
         getByPrefix(node, qwe, prefix);
         return qwe;
     }
 
-    private void getByPrefix(TrieNode node, List<String> result, String path) {
+    private void getByPrefix(TrieNode node, List<WordK> result, String path) {
         TrieNode[] children = node.getChildrenArray();
         if (node.isKey()) {
-            result.add(path);
+            WordK topK = new WordK(path, node.getData());
+            result.add(topK);
         }
-
         for (TrieNode current : children) {
             if (current != null) {
                 getByPrefix(current, result, path + current.getValue());
