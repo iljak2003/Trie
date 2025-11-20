@@ -13,7 +13,7 @@ public class TrieNode {
         this.value = value;
     }
 
-    TrieNode() {
+    public TrieNode() {
         this.is_key = false;
         this.data = 0;
         this.value = ' ';

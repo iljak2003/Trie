@@ -1,6 +1,5 @@
 package heapselect;
 
-
 import trie_base.*;
 
 import java.util.ArrayList;
@@ -17,12 +16,12 @@ public class HeapSelect {
 
         for (WordK w : wordKList) {
             if (heap.size() < k) {
-                heap.offer(w);
+                heap.add(w);
             } else {
                 WordK min = heap.peek();
                 if (min != null && w.getK() > min.getK()) {
                     heap.poll();
-                    heap.offer(w);
+                    heap.add(w);
                 }
             }
         }
